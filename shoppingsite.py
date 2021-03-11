@@ -6,7 +6,7 @@ put melons in a shopping cart.
 Authors: Joel Burton, Christian Fernandez, Meggie Mahnken, Katie Byers.
 """
 
-from flask import Flask, render_template, redirect, flash
+from flask import Flask, render_template, redirect, flash, session
 import jinja2
 
 import melons
@@ -14,7 +14,7 @@ import melons
 app = Flask(__name__)
 
 # A secret key is needed to use Flask sessioning features
-app.secret_key = 'this-should-be-something-unguessable'
+app.secret_key = 'askdjasuwehqwiduiqdasnxniiuuy2uyt2653716'
 
 # Normally, if you refer to an undefined variable in a Jinja template,
 # Jinja silently ignores this. This makes debugging difficult, so we'll
@@ -51,14 +51,12 @@ def show_melon(melon_id):
     """
 
     melon = melons.get_by_id(melon_id)
+    
     print(melon)
     return render_template("melon_details.html",
                            display_melon=melon)
 
 
-
-                            #@app.route("/melon/<melon_id>")
-#def show_melon(melon_id):
 
 
 @app.route("/cart")
@@ -94,7 +92,22 @@ def add_to_cart(melon_id):
     page and display a confirmation message: 'Melon successfully added to
     cart'."""
 
+    count = 0
+    
     # TODO: Finish shopping cart functionality
+    if "cart" in session.keys():
+        print(session["cart"])
+        if melon_id in session["cart"]:
+            melon_id["qty"] += 1
+        else:
+            melon_id["qty"] = 1
+    else:
+        session["cart"] = {}
+
+
+
+        # add thing to the dict
+        # if it is already in the cart increase qty by 1
 
     # The logic here should be something like:
     #
@@ -105,7 +118,7 @@ def add_to_cart(melon_id):
     # - flash a success message
     # - redirect the user to the cart page
 
-    return "Oops! This needs to be implemented!"
+    return flash("Your item has successlly been added to cart!")
 
 
 @app.route("/login", methods=["GET"])
@@ -137,7 +150,8 @@ def process_login():
     # - if they don't, flash a failure message and redirect back to "/login"
     # - do the same if a Customer with that email doesn't exist
 
-    return "Oops! This needs to be implemented"
+    
+    return "Oops! This needs to be implemented!"
 
 
 @app.route("/checkout")
@@ -149,6 +163,10 @@ def checkout():
 
     flash("Sorry! Checkout will be implemented in a future version.")
     return redirect("/melons")
+
+    
+    
+
 
 
 if __name__ == "__main__":

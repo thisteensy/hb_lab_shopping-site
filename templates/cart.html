@@ -14,18 +14,6 @@
         </thead>
         <tbody>
         <tr>
-            {% for melon_id in session["cart"] %}
-                <td> {{ display_melon.common_name }} </td> 
-                <td> {{ qty }}</td>
-                <td> {{ display_melon.price_str }}</td>
-                <td> {{ qty * display_melon.price_str }} </td>
-            
-            {% endfor %}
-        </tr>
-        </tbody>
-        <!-- </tr>
-        <tbody>
-        <tr>
             <td>Ancient Watermelon</td>
             <td>5</td>
             <td>$3.00</td>
@@ -48,7 +36,7 @@
             <td>2</td>
             <td>$3.00</td>
             <td>$6.00</td>
-        </tr> -->
+        </tr>
     </table>
 
     <h3>Total: $27.00</h3>

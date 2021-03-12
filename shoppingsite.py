@@ -102,7 +102,8 @@ def show_shopping_cart():
 
     return render_template("cart.html", 
                             cart=melon_list,
-                            order_total=order_total)
+                            order_total=order_total,
+                            )
 
 
 @app.route("/add_to_cart/<melon_id>")
